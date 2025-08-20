@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+# ⚽ Football Predictions Leaderboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based web application for displaying and tracking football (soccer) prediction rankings.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Leaderboard Display**: Shows player rankings based on prediction accuracy and points
+- **Visual Rankings**: Gold, silver, and bronze medals for top 3 players
+- **Statistics Cards**: Display total players, top score, and average points
+- **Responsive Design**: Works on desktop, tablet, and mobile devices
+- **Modern UI**: Clean, professional design with hover effects and smooth transitions
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Prerequisites
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Node.js (version 14 or higher)
+- npm or yarn
 
-### `npm test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository or navigate to the project directory
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+### Running the App
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Start the development server:
+```bash
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The app will open in your browser at `http://localhost:3000`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Building for Production
 
-### `npm run eject`
+Create a production build:
+```bash
+npm run build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Project Structure
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+src/
+├── components/
+│   ├── Leaderboard.tsx      # Main leaderboard component
+│   └── Leaderboard.css      # Leaderboard styles
+├── types/
+│   └── leaderboard.ts       # TypeScript interfaces
+├── App.tsx                  # Main app component
+└── index.tsx                # App entry point
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Data Structure
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The app currently uses mock data for demonstration. The main data types are:
 
-## Learn More
+- **Player**: Contains player information, points, and prediction statistics
+- **Match**: Represents football matches with teams and scores
+- **Prediction**: Individual predictions made by players
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Customization
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To customize the leaderboard:
+
+1. **Add Real Data**: Replace the mock data in `Leaderboard.tsx` with real API calls
+2. **Modify Scoring**: Adjust the points calculation logic
+3. **Add Features**: Implement user authentication, prediction submission, etc.
+4. **Styling**: Modify `Leaderboard.css` to match your brand colors
+
+## Technologies Used
+
+- React 18
+- TypeScript
+- CSS3 with Grid and Flexbox
+- Responsive design principles
+
+## License
+
+This project is open source and available under the MIT License.
