@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { Player } from '../types/leaderboard';
-import { getApiUrl, getAuthHeaders, API_CONFIG } from '../config/api';
+import { getApiUrl, API_CONFIG } from '../config/api';
 import './Leaderboard.css';
 
 const Leaderboard: React.FC = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isSticky, setIsSticky] = useState(false);
   
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,6 +24,18 @@ const Leaderboard: React.FC = () => {
       return;
     } */
     fetchLeaderboardData();
+    
+    // Add scroll event listener for sticky behavior
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      setIsSticky(scrollTop > 100);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   // Filter and paginate players
@@ -55,15 +68,15 @@ const Leaderboard: React.FC = () => {
       setError(null);
       
       const apiUrl = getApiUrl(API_CONFIG.ENDPOINTS.LEADERBOARD);
-      const headers = getAuthHeaders();
+      // const headers = getAuthHeaders();
       
-      console.log('Making API call to:', apiUrl);
-      console.log('Headers:', headers);
+      // console.log('Making API call to:', apiUrl);
+      // console.log('Headers:', headers);
       
-      const response = await axios.get(apiUrl, { headers });
+      const response = await axios.get(apiUrl);
 
-      console.log('Response status:', response.status);
-      console.log('Response data:', response.data);
+      // console.log('Response status:', response.status);
+      //console.log('Response data:', response.data);
 
       // Transform the API response to match our Player interface
       // Adjust this transformation based on the actual API response structure
@@ -199,7 +212,7 @@ const Leaderboard: React.FC = () => {
   if (loading) {
     return (
       <div className="leaderboard">
-        <h1 className="leaderboard-title">⚽ Football Predictions Leaderboard</h1>
+        <h1 className="leaderboard-title"><span className="emoji">⚽</span>Football Predictions Leaderboard</h1>
         <div className="loading-container">
           <div className="loading-spinner"></div>
           <p>Loading leaderboard data...</p>
@@ -211,7 +224,7 @@ const Leaderboard: React.FC = () => {
   if (error) {
     return (
       <div className="leaderboard">
-        <h1 className="leaderboard-title">⚽ Football Predictions Leaderboard</h1>
+        <h1 className="leaderboard-title"><span className="emoji">⚽</span>Football Predictions Leaderboard</h1>
         <div className="error-container">
           <p className="error-message">{error}</p>
           <button onClick={fetchLeaderboardData} className="retry-button">
@@ -224,10 +237,10 @@ const Leaderboard: React.FC = () => {
 
   return (
     <div className="leaderboard">
-      <h1 className="leaderboard-title">⚽ Football Predictions Leaderboard</h1>
+      <h1 className="leaderboard-title"><div className="beta-badge">Beta Version</div><span className="emoji">⚽</span>Football Predictions Leaderboard</h1>
       
       {/* Search and Controls */}
-      <div className="leaderboard-controls">
+      <div className={`leaderboard-controls ${isSticky ? 'sticky' : ''}`}>
         <div className="search-container">
           <input
             type="text"
