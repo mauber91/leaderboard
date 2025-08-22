@@ -472,6 +472,7 @@
     grid-template-columns: 60px 1.5fr 1fr 1fr 1fr;
     padding: 12px 16px;
     font-size: 0.75rem;
+    gap: 8px;
   }
   
   .leaderboard .leaderboard-table .header-rank,
@@ -491,15 +492,36 @@
 @media (max-width: 480px) {
   .leaderboard .leaderboard-table .table-header,
   .leaderboard .leaderboard-table .table-row {
-    grid-template-columns: 50px 1fr 1fr;
-    gap: 8px;
+    grid-template-columns: 50px 1fr 1fr 1fr 1fr;
+    gap: 6px;
+    padding: 10px 12px;
+    font-size: 0.7rem;
+    min-height: 50px;
+  }
+  
+  .leaderboard .leaderboard-table .header-rank,
+  .leaderboard .leaderboard-table .rank {
+    font-size: 0.65rem;
   }
   
   .leaderboard .leaderboard-table .header-distance-1st,
-  .leaderboard .leaderboard-table .header-distance-top100,
+  .leaderboard .leaderboard-table .header-distance-top100 {
+    font-size: 0.6rem;
+    text-align: center;
+  }
+  
   .leaderboard .leaderboard-table .distance-1st,
   .leaderboard .leaderboard-table .distance-top100 {
-    display: none;
+    font-size: 0.65rem;
+    text-align: center;
+  }
+  
+  .leaderboard .leaderboard-table .distance-1st .leader-badge,
+  .leaderboard .leaderboard-table .distance-top100 .leader-badge,
+  .leaderboard .leaderboard-table .distance-1st .top100-badge,
+  .leaderboard .leaderboard-table .distance-top100 .top100-badge {
+    font-size: 0.6rem;
+    padding: 2px 6px;
   }
   
   .leaderboard .pagination .pagination-controls .pagination-btn {
@@ -511,5 +533,39 @@
   .leaderboard .leaderboard-controls .search-container .search-input {
     padding: 10px 40px 10px 12px;
     font-size: 0.875rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+  .leaderboard .leaderboard-table .table-header,
+  .leaderboard .leaderboard-table .table-row {
+    grid-template-columns: 45px 1fr 1fr 1fr 1fr;
+    gap: 4px;
+    padding: 8px 10px;
+    font-size: 0.65rem;
+  }
+  
+  .leaderboard .leaderboard-table .header-rank,
+  .leaderboard .leaderboard-table .rank {
+    font-size: 0.6rem;
+  }
+  
+  .leaderboard .leaderboard-table .header-distance-1st,
+  .leaderboard .leaderboard-table .header-distance-top100 {
+    font-size: 0.55rem;
+  }
+  
+  .leaderboard .leaderboard-table .distance-1st,
+  .leaderboard .leaderboard-table .distance-top100 {
+    font-size: 0.6rem;
+  }
+  
+  .leaderboard .leaderboard-table .distance-1st .leader-badge,
+  .leaderboard .leaderboard-table .distance-top100 .leader-badge,
+  .leaderboard .leaderboard-table .distance-1st .top100-badge,
+  .leaderboard .leaderboard-table .distance-top100 .top100-badge {
+    font-size: 0.55rem;
+    padding: 1px 4px;
   }
 }
