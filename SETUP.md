@@ -42,7 +42,7 @@ If you prefer to set the token directly in the code:
 
 Once configured:
 
-1. The app will automatically fetch data from `https://binging.fly.dev/lb/points`
+1. The app will automatically fetch data from `https://binging.fly.dev/points`
 2. You'll see a loading spinner while data is being fetched
 3. If successful, the leaderboard will display real data from the API
 4. If there's an error, you'll see helpful error messages

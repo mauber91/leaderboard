@@ -6,6 +6,7 @@ A React-based web application for displaying and tracking football (soccer) pred
 
 - **Leaderboard Display**: Shows player rankings based on prediction accuracy and points
 - **Visual Rankings**: Gold, silver, and bronze medals for top 3 players
+- **Interactive Rankings**: Click on any rank number to jump to that position on the full page
 - **Statistics Cards**: Display total players, top score, and average points
 - **Responsive Design**: Works on desktop, tablet, and mobile devices
 - **Modern UI**: Clean, professional design with hover effects and smooth transitions

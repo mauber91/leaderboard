@@ -24,7 +24,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "push-deploy": "git push && npm run build && npm run deploy"
   },
   "eslintConfig": {
     "extends": [
@@ -47,5 +48,5 @@
   "devDependencies": {
     "gh-pages": "^6.3.0"
   },
-  "homepage": "https://football.football"
+  "homepage": "https://leaderboard.football"
 }
