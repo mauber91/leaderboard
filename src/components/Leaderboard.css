@@ -222,13 +222,22 @@
   border-bottom: 1px solid #e8e8e8;
 }
 
-.leaderboard .leaderboard-table .table-header .header-rank,
-.leaderboard .leaderboard-table .table-header .header-name,
-.leaderboard .leaderboard-table .table-header .header-points,
-.leaderboard .leaderboard-table .table-header .header-distance-1st,
-.leaderboard .leaderboard-table .table-header .header-distance-top100 {
+/* When actions column is present (during search) */
+.leaderboard .leaderboard-table.searching .table-header {
+  grid-template-columns: 80px 2fr 1fr 1fr 1fr 1fr;
+}
+
+/* Actions column styles */
+.leaderboard .leaderboard-table .table-header .header-actions {
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.leaderboard .leaderboard-table .table-row .actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .leaderboard .leaderboard-table .table-row {
@@ -237,6 +246,69 @@
   padding: 16px 20px;
   border-bottom: 1px solid #f1f1f0;
   transition: all 0.2s ease;
+}
+
+/* When actions column is present (during search) */
+.leaderboard .leaderboard-table.searching .table-row {
+  grid-template-columns: 80px 2fr 1fr 1fr 1fr 1fr;
+}
+
+/* Actions column in table rows */
+.leaderboard .leaderboard-table .table-row .actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Jump button styles */
+.leaderboard .leaderboard-table .table-row .actions .jump-button {
+  background: #0066ff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard .leaderboard-table .table-row .actions .jump-button:hover {
+  background: #0052cc;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.leaderboard .leaderboard-table .table-row .actions .jump-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Highlight effect for jumped player */
+.leaderboard .leaderboard-table .table-row.highlight-player {
+  animation: highlightPulse 2s ease-in-out;
+}
+
+@keyframes highlightPulse {
+  0% { background-color: #f7f6f3; }
+  25% { background-color: #fff3cd; border-left: 4px solid #ffc107; }
+  50% { background-color: #fff3cd; border-left: 4px solid #ffc107; }
+  100% { background-color: #f7f6f3; }
+}
+
+
+
+/* Table row styles */
+.leaderboard .leaderboard-table .table-header .header-rank,
+.leaderboard .leaderboard-table .table-header .header-name,
+.leaderboard .leaderboard-table .table-header .header-points,
+.leaderboard .leaderboard-table .table-header .header-distance-1st,
+.leaderboard .leaderboard-table .table-header .header-distance-top100 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .leaderboard .leaderboard-table .table-row:hover {
@@ -265,6 +337,12 @@
 
 .leaderboard .leaderboard-table .table-row .rank .rank-icon {
   font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.leaderboard .leaderboard-table .table-row .rank .rank-icon:hover {
+  transform: scale(1.1);
 }
 
 .leaderboard .leaderboard-table .table-row .player-name {
@@ -280,6 +358,7 @@
   font-size: 1rem;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .leaderboard .leaderboard-table .table-row .distance-1st,
@@ -317,6 +396,59 @@
 .leaderboard .leaderboard-table .table-row .distance-top100 .distance-value {
   font-weight: 700;
   font-size: 0.875rem;
+}
+
+/* Go to Top button styles */
+.leaderboard .go-to-top-container {
+  display: flex;
+  justify-content: center;
+  margin: 32px 0;
+}
+
+.leaderboard .go-to-top-button {
+  background: #0066ff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.leaderboard .go-to-top-button:hover {
+  background: #0052cc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 102, 255, 0.3);
+}
+
+.leaderboard .go-to-top-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.2);
+}
+
+/* Responsive adjustments for Go to Top button */
+@media (max-width: 768px) {
+  .leaderboard .go-to-top-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaderboard .go-to-top-button {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
 }
 
 /* Pagination */
@@ -475,6 +607,11 @@
     gap: 8px;
   }
   
+  .leaderboard .leaderboard-table.searching .table-header,
+  .leaderboard .leaderboard-table.searching .table-row {
+    grid-template-columns: 60px 1.5fr 1fr 1fr 1fr 1fr;
+  }
+  
   .leaderboard .leaderboard-table .header-rank,
   .leaderboard .leaderboard-table .rank {
     font-size: 0.7rem;
@@ -497,6 +634,11 @@
     padding: 10px 12px;
     font-size: 0.7rem;
     min-height: 50px;
+  }
+  
+  .leaderboard .leaderboard-table.searching .table-header,
+  .leaderboard .leaderboard-table.searching .table-row {
+    grid-template-columns: 50px 1fr 1fr 1fr 1fr 1fr;
   }
   
   .leaderboard .leaderboard-table .header-rank,
@@ -546,6 +688,11 @@
     font-size: 0.65rem;
   }
   
+  .leaderboard .leaderboard-table.searching .table-header,
+  .leaderboard .leaderboard-table.searching .table-row {
+    grid-template-columns: 45px 1fr 1fr 1fr 1fr 1fr;
+  }
+  
   .leaderboard .leaderboard-table .header-rank,
   .leaderboard .leaderboard-table .rank {
     font-size: 0.6rem;
@@ -567,5 +714,27 @@
   .leaderboard .leaderboard-table .distance-top100 .top100-badge {
     font-size: 0.55rem;
     padding: 1px 4px;
+  }
+}
+
+/* Jump button responsive adjustments */
+@media (max-width: 768px) {
+  .leaderboard .leaderboard-table .table-row .actions .jump-button {
+    padding: 6px 12px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaderboard .leaderboard-table .table-row .actions .jump-button {
+    padding: 4px 8px;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .leaderboard .leaderboard-table .table-row .actions .jump-button {
+    padding: 3px 6px;
+    font-size: 0.6rem;
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import axios from 'axios';
 import { Player } from '../types/leaderboard';
 import { getApiUrl, API_CONFIG } from '../config/api';
@@ -9,6 +9,7 @@ const Leaderboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isSticky, setIsSticky] = useState(false);
+  const [showGoToTop, setShowGoToTop] = useState(false);
   
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,6 +17,9 @@ const Leaderboard: React.FC = () => {
   
   // Search state
   const [searchTerm, setSearchTerm] = useState('');
+  
+  // Refs for scrolling to positions
+  const playerRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   useEffect(() => {
     /* if (!isTokenConfigured()) {
@@ -25,10 +29,17 @@ const Leaderboard: React.FC = () => {
     } */
     fetchLeaderboardData();
     
-    // Add scroll event listener for sticky behavior
+    // Add scroll event listener for sticky behavior and Go To Top button
     const handleScroll = () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       setIsSticky(scrollTop > 100);
+      
+      // Show Go To Top button only when scrolled past 50 items
+      // Assuming each table row is roughly 60px tall, 50 items = 3000px
+      const tableElement = document.querySelector('.leaderboard-table') as HTMLElement;
+      const tableStartPosition = tableElement?.offsetTop || 0;
+      const scrollPast50Items = scrollTop > (tableStartPosition + 3000);
+      setShowGoToTop(scrollPast50Items);
     };
     
     window.addEventListener('scroll', handleScroll);
@@ -209,6 +220,37 @@ const Leaderboard: React.FC = () => {
     );
   };
 
+  const scrollToPlayerPosition = (playerId: string) => {
+    // Clear search to show all players
+    setSearchTerm('');
+    setCurrentPage(1);
+    setItemsPerPage(players.length); // Show all items
+    
+    // Wait for the next render cycle to ensure the table is updated
+    setTimeout(() => {
+      const playerElement = playerRefs.current[playerId];
+      if (playerElement) {
+        playerElement.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+        
+        // Add a highlight effect
+        playerElement.classList.add('highlight-player');
+        setTimeout(() => {
+          playerElement.classList.remove('highlight-player');
+        }, 2000);
+      }
+    }, 100);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   if (loading) {
     return (
       <div className="leaderboard">
@@ -263,6 +305,7 @@ const Leaderboard: React.FC = () => {
             <option value={25}>25</option>
             <option value={50}>50</option>
             <option value={100}>100</option>
+            <option value={players.length}>All ({players.length})</option>
           </select>
           <span>per page</span>
         </div>
@@ -275,6 +318,7 @@ const Leaderboard: React.FC = () => {
           <div className="header-points">Points</div>
           <div className="header-distance-1st">To 1st</div>
           <div className="header-distance-top100">To Top 100</div>
+          {searchTerm && <div className="header-actions">Actions</div>}
         </div>
         
         {filteredAndPaginatedPlayers.filteredPlayers.map((player) => {
@@ -285,9 +329,13 @@ const Leaderboard: React.FC = () => {
           const distanceToTop100 = player.points - top100Threshold;
           
           return (
-            <div key={player.id} className={`table-row ${player.rank <= 3 ? 'top-three' : ''}`}>
+            <div 
+              key={player.id} 
+              className={`table-row ${player.rank <= 3 ? 'top-three' : ''}`}
+              ref={(el) => { playerRefs.current[player.id] = el; }}
+            >
               <div className="rank">
-                <span className="rank-icon">{getRankIcon(player.rank)}</span>
+                <span className="rank-icon" title='Jump to position' onClick={() => scrollToPlayerPosition(player.id)}>{getRankIcon(player.rank)}</span>
               </div>
               <div className="player-name">{player.name}</div>
               <div className="points">{player.points}</div>
@@ -305,13 +353,33 @@ const Leaderboard: React.FC = () => {
                   <span className="distance-value">-{Math.abs(distanceToTop100)}</span>
                 )}
               </div>
+              {/* {searchTerm && (
+                <div className="actions">
+                  <button
+                    onClick={() => scrollToPlayerPosition(player.id)}
+                    className="jump-button"
+                    title="Jump to position in main table"
+                  >
+                    🎯 Jump to Position
+                  </button>
+                </div>
+              )} */}
             </div>
           );
         })}
       </div>
       
-      {/* Pagination */}
-      {renderPagination()}
+      {/* Pagination - only show when not showing all items */}
+      {itemsPerPage < players.length && renderPagination()}
+      
+      {/* Go to Top button - only show when scrolled down past 50 items */}
+      {showGoToTop && (
+        <div className="go-to-top-container">
+          <button onClick={scrollToTop} className="go-to-top-button">
+            ⬆️ Go to Top
+          </button>
+        </div>
+      )}
       
       <div className="leaderboard-stats">
         <div className="stat-card">
