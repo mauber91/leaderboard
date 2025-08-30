@@ -21,6 +21,14 @@
   font-size: 2rem;
 }
 
+/* Last updated timestamp */
+.leaderboard .last-updated {
+  text-align: center;
+  color: #787774;
+  font-size: 0.875rem;
+  margin: -20px 0 12px;
+}
+
 /* Beta Badge */
 .leaderboard .beta-badge {
   display: inline-block;

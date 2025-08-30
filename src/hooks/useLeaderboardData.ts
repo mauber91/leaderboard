@@ -7,6 +7,7 @@ export const useLeaderboardData = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [lastUpdate, setLastUpdate] = useState('');
 
   const fetchLeaderboardData = async () => {
     try {
@@ -16,6 +17,10 @@ export const useLeaderboardData = () => {
       const apiUrl = getApiUrl(API_CONFIG.ENDPOINTS.LEADERBOARD);
       
       const response = await axios.get(apiUrl);
+      // Prefer API-provided update timestamp if available; fallback to now (store ISO for reliable parsing)
+      const updatedAt = response?.data?.updated;
+      const isoUpdate = updatedAt ? new Date(updatedAt).toISOString() : new Date().toISOString();
+      setLastUpdate(isoUpdate);
 
       // Transform the API response to match our Player interface
       const transformedPlayers: Player[] = response.data.rows.map((player: any, index: number) => ({
@@ -65,6 +70,7 @@ export const useLeaderboardData = () => {
 
   return {
     players,
+    lastUpdate,
     loading,
     error,
     fetchLeaderboardData

@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useLeaderboardData } from '../../hooks/useLeaderboardData';
 import { useLeaderboardState } from '../../hooks/useLeaderboardState';
 import LeaderboardControls from './LeaderboardControls';
 import LeaderboardTable from './LeaderboardTable';
 import LeaderboardStats from './LeaderboardStats';
 import './Leaderboard.css';
+import { formatTimeAgo } from '../../utils/time';
 
 const LeaderboardContainer: React.FC = () => {
-  const { players, loading, error, fetchLeaderboardData } = useLeaderboardData();
+  const { players, loading, error, fetchLeaderboardData, lastUpdate } = useLeaderboardData();
   const {
     currentPage,
     itemsPerPage,
@@ -20,6 +21,8 @@ const LeaderboardContainer: React.FC = () => {
     showGoToTop,
     scrollToTop
   } = useLeaderboardState(players);
+
+  const lastUpdatedRelative = useMemo(() => (lastUpdate ? formatTimeAgo(lastUpdate) : ''), [lastUpdate]);
 
   const handleScrollToPlayer = (playerId: string) => {
     // Clear search to show all players
@@ -60,7 +63,10 @@ const LeaderboardContainer: React.FC = () => {
         <div className="beta-badge">Beta Version</div>
         <span className="emoji">⚽</span>Football Predictions Leaderboard
       </h1>
-      
+      {lastUpdatedRelative && (
+        <div className="last-updated">last update: {lastUpdatedRelative}</div>
+      )}
+
       <LeaderboardControls
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
