@@ -360,6 +360,14 @@
   align-items: center;
 }
 
+.leaderboard .leaderboard-table .table-row .player-name .player-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: cover;
+  margin-left: 8px;
+  border-radius: 3px;
+}
+
 .leaderboard .leaderboard-table .table-row .points {
   font-weight: 700;
   color: #2e7d32;

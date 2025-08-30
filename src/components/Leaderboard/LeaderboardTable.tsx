@@ -157,7 +157,17 @@ const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
               <div className="rank">
                 <span className="rank-icon" title='Jump to position' onClick={() => scrollToPlayerPosition(player.id)}>{getRankIcon(player.rank)}</span>
               </div>
-              <div className="player-name">{player.name}</div>
+              <div className="player-name">
+                <span>{player.name}</span>
+                {player.name === 'kurt0411' && (
+                  <img
+                    className="player-icon"
+                    src="https://shop.universalorlando.com/merchimages/P-ET-Uni-Mini-Plush-1291140.jpg"
+                    alt=""
+                    title="with E.T.'s help"
+                  />
+                )}
+              </div>
               <div className="points">{player.points}</div>
               <div className="distance-1st">
                 {distanceTo1st === 0 ? (
