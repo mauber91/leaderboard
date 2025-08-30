@@ -18,7 +18,7 @@ export const useLeaderboardData = () => {
       const response = await axios.get(apiUrl);
 
       // Transform the API response to match our Player interface
-      const transformedPlayers: Player[] = response.data.map((player: any, index: number) => ({
+      const transformedPlayers: Player[] = response.data.rows.map((player: any, index: number) => ({
         id: player.id || `player-${index}`,
         name: player.name || player.username || `Player ${index + 1}`,
         points: player.points || player.score || 0,
