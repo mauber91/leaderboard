@@ -66,3 +66,19 @@
 .App ::-webkit-scrollbar-thumb:hover {
   background: #b3b3b1;
 }
+
+.app-container {
+  position: relative; /* Needed so overlay is positioned correctly */
+  pointer-events: none !important;
+}
+
+.app-container::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(128, 128, 128, 0.6); /* gray with transparency */
+  cursor: not-allowed;
+  z-index: 100; /* sit on top */
+  height: 100%;
+  
+}
