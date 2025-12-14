@@ -24,7 +24,7 @@ const Snow: React.FC = () => {
           left: Math.random() * 100, // Random horizontal position (0-100%)
           animationDuration: 3 + Math.random() * 7, // 3-10 seconds
           animationDelay: Math.random() * 5, // 0-5 seconds delay
-          size: 2 + Math.random() * 4, // 2-6px
+          size: 2 + Math.random() * 4.5, // 2-6px
           opacity: 0.3 + Math.random() * 0.7, // 0.3-1.0
         });
       }
