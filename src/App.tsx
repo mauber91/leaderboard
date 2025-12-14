@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import './App.css';
 import Leaderboard from './components/Leaderboard';
 import Snow from './components/Snow';
-import jingleBells from './jingle-bells.mp3';
 
 function App() {
+  const mp3Url = 'https://cdn.pixabay.com/audio/2025/11/29/audio_d1c955f418.mp3';
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-       <audio ref={audioRef} src={jingleBells} />
+       <audio ref={audioRef} src={mp3Url} />
        <Snow />
        <Leaderboard />
     </div>
