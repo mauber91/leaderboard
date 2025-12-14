@@ -60,13 +60,13 @@ const LeaderboardContainer: React.FC = () => {
           <p>Loading leaderboard data...</p>
         </div>
       </div>
-    );
+    );  
   }
 
   if (error) {
     return (
       <div className="leaderboard">
-        <h1 className="leaderboard-title">{/* <span className="emoji">⚽</span> */}Football Predictions Leaderboard</h1>
+        <h1 className="leaderboard-title">{/* <span className="emoji">⚽</span> */}Kurt0411's Football Predictions Leaderboard</h1>
         <div className="error-container">
           <p className="error-message">{error}</p>
           <button onClick={fetchLeaderboardData} className="retry-button">
@@ -83,7 +83,7 @@ const LeaderboardContainer: React.FC = () => {
         <img src={fbxmas2Image} alt="Leaderboard header" className="header-image" />
       </div>
       <h1 className="leaderboard-title">
-        {/* <span className="emoji">⚽</span> */}Football Predictions Leaderboard
+        {/* <span className="emoji">⚽</span> */}Kurt0411's Football Predictions Leaderboard
       </h1>
       {lastUpdatedRelative && (
         <div className="last-updated">last update: {lastUpdatedRelative}</div>
