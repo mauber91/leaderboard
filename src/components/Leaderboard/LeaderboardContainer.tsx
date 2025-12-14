@@ -6,8 +6,13 @@ import LeaderboardTable from './LeaderboardTable';
 import LeaderboardStats from './LeaderboardStats';
 import './Leaderboard.css';
 import { formatTimeAgo } from '../../utils/time';
+import { streamResponse } from '../../config/llm-api';
+import fbxmas2Image from '../../fbxmas2.png';
 
 const LeaderboardContainer: React.FC = () => {
+  const [llmRequest, setLlmRequest] = React.useState<string>('');
+  const [llmResponse, setLlmResponse] = React.useState<string>('');
+
   const { players, loading, error, fetchLeaderboardData, lastUpdate } = useLeaderboardData();
   const {
     currentPage,
@@ -31,10 +36,25 @@ const LeaderboardContainer: React.FC = () => {
     handleItemsPerPageChange(players.length); // Show all items
   };
 
-  if (loading) {
+  const callLLM = async (input: string) => {
+    setLlmResponse('');
+    if (!input.trim()) return;
+    setLlmRequest(input);
+    await streamResponse('http://localhost:8787', input, (token) => {
+      console.log('token', token);
+      
+      setLlmResponse((prev) => prev + token);
+    });
+    // setLlmResponse(res);
+  };
+
+  if  (loading) {
     return (
       <div className="leaderboard">
-        <h1 className="leaderboard-title"><span className="emoji">⚽</span>Football Predictions Leaderboard</h1>
+        <div className="leaderboard-header-image">
+        <img src={fbxmas2Image} alt="Leaderboard header" className="header-image" />
+      </div>
+        <h1 className="leaderboard-title">{/* <span className="emoji">⚽</span> */}Football Predictions Leaderboard</h1>
         <div className="loading-container">
           <div className="loading-spinner"></div>
           <p>Loading leaderboard data...</p>
@@ -46,7 +66,7 @@ const LeaderboardContainer: React.FC = () => {
   if (error) {
     return (
       <div className="leaderboard">
-        <h1 className="leaderboard-title"><span className="emoji">⚽</span>Football Predictions Leaderboard</h1>
+        <h1 className="leaderboard-title">{/* <span className="emoji">⚽</span> */}Football Predictions Leaderboard</h1>
         <div className="error-container">
           <p className="error-message">{error}</p>
           <button onClick={fetchLeaderboardData} className="retry-button">
@@ -59,13 +79,32 @@ const LeaderboardContainer: React.FC = () => {
 
   return (
     <div className="leaderboard">
+      <div className="leaderboard-header-image">
+        <img src={fbxmas2Image} alt="Leaderboard header" className="header-image" />
+      </div>
       <h1 className="leaderboard-title">
-        <div className="beta-badge">Beta Version</div>
-        <span className="emoji">⚽</span>Football Predictions Leaderboard
+        {/* <span className="emoji">⚽</span> */}Football Predictions Leaderboard
       </h1>
       {lastUpdatedRelative && (
         <div className="last-updated">last update: {lastUpdatedRelative}</div>
       )}
+
+      {/* <div>
+        <input
+          type="text"
+          placeholder="ask ET"
+          value={llmRequest}
+          onChange={(e) => setLlmRequest(e.target.value)}
+          className="search-input"
+        />
+        <button
+          key="next"
+          onClick={() => callLLM(llmRequest)}
+          className="pagination-btn"
+        >
+          call
+        </button>
+      </div> */}
 
       <LeaderboardControls
         searchTerm={searchTerm}

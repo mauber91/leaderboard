@@ -21,6 +21,27 @@
   font-size: 2rem;
 }
 
+/* Header Image */
+.leaderboard .leaderboard-header-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.leaderboard .leaderboard-header-image .header-image {
+  width: 200px;
+  height: 109px;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+  overflow: visible;
+  padding: 0;
+}
+
 /* Last updated timestamp */
 .leaderboard .last-updated {
   text-align: center;
@@ -361,8 +382,8 @@
 }
 
 .leaderboard .leaderboard-table .table-row .player-name .player-icon {
-  width: 16px;
-  height: 16px;
+  width: 30px;
+  height: 30px;
   object-fit: cover;
   margin-left: 8px;
   border-radius: 3px;
@@ -578,6 +599,11 @@
   .leaderboard .leaderboard-title {
     font-size: 1.875rem;
     margin-bottom: 32px;
+  }
+  
+  .leaderboard .leaderboard-header-image .header-image {
+    width: 200px;
+    height: 109px;
   }
   
   .leaderboard .leaderboard-controls {
