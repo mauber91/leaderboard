@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
-      audio.volume = 0.2; // Set volume to 20%
+      audio.volume = 0.07; // Set volume to 20%
       audio.loop = true; // Loop the music
       
       // Handle audio loading errors
