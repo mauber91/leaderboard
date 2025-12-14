@@ -6,12 +6,12 @@ import LeaderboardTable from './LeaderboardTable';
 import LeaderboardStats from './LeaderboardStats';
 import './Leaderboard.css';
 import { formatTimeAgo } from '../../utils/time';
-import { streamResponse } from '../../config/llm-api';
+// import { streamResponse } from '../../config/llm-api';
 import fbxmas2Image from '../../fbxmas2.png';
 
 const LeaderboardContainer: React.FC = () => {
-  const [llmRequest, setLlmRequest] = React.useState<string>('');
-  const [llmResponse, setLlmResponse] = React.useState<string>('');
+  // const [llmRequest, setLlmRequest] = React.useState<string>('');
+  // const [llmResponse, setLlmResponse] = React.useState<string>('');
 
   const { players, loading, error, fetchLeaderboardData, lastUpdate } = useLeaderboardData();
   const {
@@ -36,17 +36,17 @@ const LeaderboardContainer: React.FC = () => {
     handleItemsPerPageChange(players.length); // Show all items
   };
 
-  const callLLM = async (input: string) => {
-    setLlmResponse('');
-    if (!input.trim()) return;
-    setLlmRequest(input);
-    await streamResponse('http://localhost:8787', input, (token) => {
-      console.log('token', token);
-      
-      setLlmResponse((prev) => prev + token);
-    });
-    // setLlmResponse(res);
-  };
+  // const callLLM = async (input: string) => {
+  //   setLlmResponse('');
+  //   if (!input.trim()) return;
+  //   setLlmRequest(input);
+  //   await streamResponse('http://localhost:8787', input, (token) => {
+  //     console.log('token', token);
+  //     
+  //     setLlmResponse((prev) => prev + token);
+  //   });
+  //   // setLlmResponse(res);
+  // };
 
   if  (loading) {
     return (
