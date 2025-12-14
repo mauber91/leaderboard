@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import './App.css';
 import Leaderboard from './components/Leaderboard';
 import Snow from './components/Snow';
+import jingleBells from './jingle-bells.mp3';
 
 function App() {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -9,7 +10,7 @@ function App() {
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
-      audio.volume = 0.2; // Set volume to 30%
+      audio.volume = 0.2; // Set volume to 20%
       audio.loop = true; // Loop the music
       // Attempt to play, but handle autoplay restrictions
       audio.play().catch((error) => {
@@ -21,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-       <audio ref={audioRef} src={`${process.env.PUBLIC_URL}/jingle-bells.mp3`} />
+       <audio ref={audioRef} src={jingleBells} />
        <Snow />
        <Leaderboard />
     </div>

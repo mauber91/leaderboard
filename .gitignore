@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# compression scripts (optional utility)
+scripts/compress-mp3.js
+COMPRESS_MP3.md

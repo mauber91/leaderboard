@@ -25,6 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "compress-mp3": "node scripts/compress-mp3.js",
     "predeploy": "npm run build",
     "deploy": "git config --global http.postBuffer 524288000 && git config --global http.maxRequestBuffer 524288000 && GIT_HTTP_BUFFER=524288000 gh-pages -d build",
     "push-deploy": "git push && npm run build && npm run deploy"
