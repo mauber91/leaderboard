@@ -54,7 +54,7 @@ const LeaderboardContainer: React.FC = () => {
         <div className="leaderboard-header-image">
         <img src={fbxmas2Image} alt="Leaderboard header" className="header-image" />
       </div>
-        <h1 className="leaderboard-title">{/* <span className="emoji">⚽</span> */}Football Predictions Leaderboard</h1>
+        <h1 className="leaderboard-title">{/* <span className="emoji">⚽</span> */}Kurt0411's Football Predictions Leaderboard</h1>
         <div className="loading-container">
           <div className="loading-spinner"></div>
           <p>Loading leaderboard data...</p>
