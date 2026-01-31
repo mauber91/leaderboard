@@ -161,7 +161,7 @@ const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
               <div className="player-name">
                 <span>{player.name}</span>
                 {player.name === 'kurt0411' && (
-                  <span>aka 05</span>
+                  <span> (aka 05)</span>
                 )}
               </div>
               <div className="points">{player.points}</div>
