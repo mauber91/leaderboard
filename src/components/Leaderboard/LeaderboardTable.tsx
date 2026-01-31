@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Player } from '../../types/leaderboard';
-import etxmasImage from '../../etxmas.png';
+// import etxmasImage from '../../etxmas.png';
 
 interface LeaderboardTableProps {
   players: Player[];
@@ -161,12 +161,7 @@ const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
               <div className="player-name">
                 <span>{player.name}</span>
                 {player.name === 'kurt0411' && (
-                  <img
-                    className="player-icon"
-                    src={etxmasImage}
-                    alt=""
-                    title="with E.T.'s help"
-                  />
+                  <span>aka 05</span>
                 )}
               </div>
               <div className="points">{player.points}</div>

@@ -7,7 +7,7 @@ import LeaderboardStats from './LeaderboardStats';
 import './Leaderboard.css';
 import { formatTimeAgo } from '../../utils/time';
 // import { streamResponse } from '../../config/llm-api';
-import fbxmas2Image from '../../fbxmas2.png';
+import SoccerHeaderAnimation from './SoccerHeaderAnimation';
 
 const LeaderboardContainer: React.FC = () => {
   // const [llmRequest, setLlmRequest] = React.useState<string>('');
@@ -51,8 +51,8 @@ const LeaderboardContainer: React.FC = () => {
   if  (loading) {
     return (
       <div className="leaderboard">
-        <div className="leaderboard-header-image">
-        <img src={fbxmas2Image} alt="Leaderboard header" className="header-image" />
+      <div className="leaderboard-header-image">
+        <SoccerHeaderAnimation />
       </div>
         <h1 className="leaderboard-title">{/* <span className="emoji">⚽</span> */}Kurt0411's Football Predictions Leaderboard</h1>
         <div className="loading-container">
@@ -80,7 +80,7 @@ const LeaderboardContainer: React.FC = () => {
   return (
     <div className="leaderboard">
       <div className="leaderboard-header-image">
-        <img src={fbxmas2Image} alt="Leaderboard header" className="header-image" />
+        <SoccerHeaderAnimation />
       </div>
       <h1 className="leaderboard-title">
         {/* <span className="emoji">⚽</span> */}Kurt0411's Football Predictions Leaderboard

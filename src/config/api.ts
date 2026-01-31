@@ -1,5 +1,5 @@
 export const API_CONFIG = {
-  BASE_URL: process.env.REACT_APP_API_BASE_URL || 'https://binging.fly.dev',
+  BASE_URL: process.env.REACT_APP_API_BASE_URL || 'https://watchalong.watch',
   ENDPOINTS: {
     LEADERBOARD: '/points'
   },
